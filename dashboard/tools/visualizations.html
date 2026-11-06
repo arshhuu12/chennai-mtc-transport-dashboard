@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transport Analytics Visualizations</title>
+
+    <link rel="stylesheet" href="../css/visualizations.css" />
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="../js/visualizations.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1>Public Transport Analytics</h1>
+      <p>Route demand, arrival delays and bus occupancy</p>
+    </header>
+
+    <main>
+      <section>
+        <h2>Dataset Status</h2>
+        <p id="visualization-status">Loading data...</p>
+      </section>
+
+      <section>
+        <h2>1. Route-wise Passenger Demand</h2>
+        <p>Compare total passenger boarding events across routes.</p>
+        <svg id="demand-chart"></svg>
+      </section>
+
+      <section>
+        <h2>2. Arrival Delay Distribution</h2>
+        <p>Distribution of early and late arrivals in minutes.</p>
+        <svg id="delay-chart"></svg>
+      </section>
+
+      <section>
+        <h2>3. Average Bus Occupancy by Route</h2>
+        <p>Average observed occupancy percentage across route stops.</p>
+        <svg id="occupancy-chart"></svg>
+      </section>
+    </main>
+
+    <footer>
+      Synthetic demonstration data — not official MTC operational records.
+    </footer>
+  </body>
+</html>

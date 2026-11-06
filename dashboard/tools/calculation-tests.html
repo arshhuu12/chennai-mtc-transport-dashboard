@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Calculation Tests</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f3f6fa;
+            color: #243247;
+            margin: 0;
+            padding: 25px;
+        }
+
+        main {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+        }
+
+        h1 {
+            color: #163b63;
+        }
+
+        button {
+            background: #163b63;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background: #edf3f9;
+        }
+
+        .pass {
+            color: green;
+            font-weight: bold;
+        }
+
+        .fail {
+            color: red;
+            font-weight: bold;
+        }
+
+        #summary {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+<main>
+    <h1>Dashboard Calculation Verification</h1>
+
+    <p>
+        This page independently tests important dashboard
+        calculations using controlled example values.
+    </p>
+
+    <button id="run-tests">Run Calculation Tests</button>
+
+    <div id="summary">Tests have not been run yet.</div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Test</th>
+                <th>Expected</th>
+                <th>Actual</th>
+                <th>Result</th>
+            </tr>
+        </thead>
+
+        <tbody id="test-results"></tbody>
+    </table>
+</main>
+
+<script src="../js/calculation-tests.js"></script>
+</body>
+</html>

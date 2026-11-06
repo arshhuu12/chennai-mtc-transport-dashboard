@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transport Dataset Generator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f3f6fa;
+        color: #243247;
+        max-width: 850px;
+        margin: 40px auto;
+        padding: 20px;
+      }
+
+      section {
+        background: white;
+        padding: 25px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+      }
+
+      button {
+        padding: 12px 18px;
+        margin: 6px;
+        border: none;
+        border-radius: 5px;
+        background: #163b63;
+        color: white;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #2875b9;
+      }
+
+      #status {
+        margin-top: 15px;
+        font-weight: bold;
+      }
+
+      #downloads {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <h1>Public Transport Dataset Generator</h1>
+
+      <p>
+        Generate a reproducible 28-day synthetic transport dataset for the
+        Chennai dashboard assignment.
+      </p>
+
+      <p>
+        Configuration: 12 routes, 20 buses, 28 days, 2 trips per route per day
+        and 4 stops per trip.
+      </p>
+
+      <button id="generate-button">Generate Dataset</button>
+
+      <p id="status">Waiting to generate data.</p>
+    </section>
+
+    <section>
+      <h2>Generated Files</h2>
+      <p>Select each file to download it individually.</p>
+      <div id="downloads"></div>
+    </section>
+
+    <script src="../js/generate-data.js"></script>
+  </body>
+</html>

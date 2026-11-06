@@ -1,0 +1,22 @@
+{
+    "dataset": "Chennai MTC prepared stop reference data",
+    "source_files": [
+        "chennai.bus.gtfs.zip",
+        "mtc_stops.geojson"
+    ],
+    "coordinate_reference_system": "WGS84 (EPSG:4326)",
+    "total_gtfs_stops": 7128,
+    "default_map_stops": 5419,
+    "coordinate_quality_rules": {
+        "verified_geojson_match": "Exact stop ID match after removing the MTC_ prefix; GeoJSON coordinates selected.",
+        "placeholder_candidate": "GTFS coordinate 12.549663, 80.143925; excluded from default map.",
+        "repeated_coordinate_review": "Unmatched stops sharing a coordinate with another unmatched stop; retained but excluded from default map.",
+        "unique_unmatched_provisional": "Unique unmatched GTFS coordinate; retained as provisional map coordinate."
+    },
+    "limitations": [
+        "GTFS and GeoJSON stop coverage is not complete.",
+        "Provisional coordinates have not been independently verified.",
+        "Repeated coordinates are flagged for review, not declared invalid.",
+        "This is static geographic reference data, not live vehicle tracking."
+    ]
+}

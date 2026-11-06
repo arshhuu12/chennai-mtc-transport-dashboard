@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dataset Validation Report</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        .validation-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .validation-card {
+            background: #edf3f9;
+            padding: 18px;
+            border-radius: 8px;
+            border-left: 4px solid #2875b9;
+        }
+
+        .validation-card h3 {
+            margin: 0 0 8px;
+            font-size: 26px;
+        }
+
+        .validation-card p {
+            margin: 0;
+        }
+
+        .validation-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .validation-table th,
+        .validation-table td {
+            padding: 11px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .validation-table th {
+            background: #edf3f9;
+        }
+
+        .status-pass {
+            color: #18733c;
+            font-weight: bold;
+        }
+
+        .status-warning {
+            color: #a56a00;
+            font-weight: bold;
+        }
+
+        .status-fail {
+            color: #bd2929;
+            font-weight: bold;
+        }
+
+        .validation-note {
+            padding: 14px;
+            background: #f3f6fa;
+            border-radius: 6px;
+            margin-top: 15px;
+        }
+
+        #run-validation {
+            background: #163b63;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 11px 18px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        #run-validation:hover {
+            background: #2875b9;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Dataset Validation Report</h1>
+        <p>Public Transport Analytics Dashboard</p>
+    </header>
+
+    <main>
+
+        <section>
+            <h2>Data Quality Overview</h2>
+
+            <p>
+                This page validates the operational CSV files
+                before they are used for dashboard analysis.
+            </p>
+
+            <p id="validation-status">
+                Ready to validate the dataset.
+            </p>
+
+            <button id="run-validation" type="button">
+                Run Dataset Validation
+            </button>
+
+            <div id="validation-summary"
+                 class="validation-summary">
+            </div>
+        </section>
+
+        <section>
+            <h2>File Inspection</h2>
+
+            <div class="table-wrapper">
+                <table class="validation-table">
+                    <thead>
+                        <tr>
+                            <th>File</th>
+                            <th>Records</th>
+                            <th>Required Columns</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="file-results">
+                        <tr>
+                            <td colspan="4">
+                                Validation has not started.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section>
+            <h2>Data Quality Checks</h2>
+
+            <div class="table-wrapper">
+                <table class="validation-table">
+                    <thead>
+                        <tr>
+                            <th>Validation Check</th>
+                            <th>Issues Found</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="quality-results">
+                        <tr>
+                            <td colspan="3">
+                                Validation has not started.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section>
+            <h2>Validation Details</h2>
+
+            <div id="validation-details">
+                <p>
+                    Detailed validation messages will appear here.
+                </p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Interpretation</h2>
+
+            <div class="validation-note">
+                <p>
+                    <strong>Important:</strong>
+                    A validation warning does not always mean
+                    the entire dataset is unusable. It means
+                    the affected records need investigation.
+                </p>
+
+                <p>
+                    Missing values are not automatically
+                    converted to zero. Invalid records must
+                    be identified and documented.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Academic Data Science and Visualization Project</p>
+        <p>Dataset Quality Assurance</p>
+    </footer>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="../js/validate-data.js"></script>
+
+</body>
+</html>

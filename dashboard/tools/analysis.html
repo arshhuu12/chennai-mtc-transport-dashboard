@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transport Data Analysis</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background: #f3f6fa;
+        color: #243247;
+        max-width: 1100px;
+        margin: 30px auto;
+        padding: 20px;
+      }
+
+      section {
+        background: white;
+        padding: 22px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+      }
+
+      h1,
+      h2 {
+        color: #163b63;
+      }
+
+      #status {
+        font-weight: bold;
+      }
+
+      #summary {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 14px;
+      }
+
+      .metric {
+        background: #edf3f9;
+        padding: 16px;
+        border-left: 4px solid #2875b9;
+        border-radius: 5px;
+      }
+
+      .metric h3 {
+        font-size: 14px;
+        font-weight: normal;
+      }
+
+      .metric p {
+        font-size: 23px;
+        font-weight: bold;
+        margin-bottom: 0;
+      }
+
+      .table-wrapper {
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 650px;
+      }
+
+      th,
+      td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+
+      th {
+        background: #163b63;
+        color: white;
+      }
+
+      tr:nth-child(even) {
+        background: #f3f6fa;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <h1>Public Transport Data Analysis</h1>
+      <p>Exploratory analysis of the generated synthetic dataset.</p>
+      <p id="status">Loading operational data...</p>
+    </section>
+
+    <section>
+      <h2>Overall Performance</h2>
+      <div id="summary"></div>
+    </section>
+
+    <section>
+      <h2>Route-wise Performance</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Route</th>
+              <th>Boardings</th>
+              <th>Alightings</th>
+              <th>Average Delay</th>
+              <th>On-time %</th>
+              <th>Average Occupancy %</th>
+            </tr>
+          </thead>
+          <tbody id="route-results"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="../js/analyze-data.js"></script>
+  
+<section id="route-efficiency" style="padding:16px;font-family:sans-serif">
+  <h2>Route Efficiency</h2>
+  <p>Journey-time ratio above 1.00 means buses run slower than scheduled. Headway CV measures regularity (lower is more regular). Headway is indicative only: each route has two trips per day.</p>
+  <svg id="efficiency-chart" width="100%" role="img" aria-label="Journey-time ratio by route"></svg>
+  <div style="overflow-x:auto">
+  <table border="1" cellspacing="0" cellpadding="4" style="border-collapse:collapse;margin-top:12px;font-size:13px">
+    <thead><tr><th>Route</th><th>Trips</th><th>Sched. min</th><th>Actual min</th><th>Ratio</th><th>Headway min</th><th>Headway CV</th><th>Avg occupancy</th><th>Status</th></tr></thead>
+    <tbody id="efficiency-body"></tbody>
+  </table>
+  </div>
+</section>
+<script src="../js/route-efficiency.js"></script>
+</body>
+</html>

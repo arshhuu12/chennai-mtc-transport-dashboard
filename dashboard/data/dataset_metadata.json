@@ -1,0 +1,40 @@
+{
+    "project": "Public Transport Analytics Dashboard",
+    "dataset_version": "1.2",
+    "city_context": "Chennai",
+    "data_strategy": "Synthetic demonstration dataset",
+    "simulation": {
+        "enabled": true,
+        "random_seed": 2026,
+        "start_date": "2026-10-01",
+        "period_days": 28,
+        "route_count": 12,
+        "bus_count": 20,
+        "trips_per_route_per_day": 2,
+        "stops_per_route": 4
+    },
+    "provenance": {
+        "routes": "Synthetic sample records",
+        "stops": "Synthetic sample records; coordinates are synthetic, randomly placed within a Chennai bounding box (12.90-13.15N, 80.15-80.30E), not real stop locations",
+        "buses": "Synthetic sample records",
+        "trips": "Synthetic",
+        "scheduled_operations": "Synthetic",
+        "actual_arrivals": "Synthetic",
+        "passenger_movements": "Synthetic",
+        "analytical_metrics": "Derived from generated records"
+    },
+    "validation": {
+        "status": "Passed",
+        "trip_count": 672,
+        "observation_count": 2688,
+        "validation_errors": 0
+    },
+    "limitations": [
+        "Not actual Chennai MTC operational data",
+        "No verified geographic coordinates",
+        "Passenger movements are simulated",
+        "Arrival times are simulated",
+        "Stop coordinates are synthetic and do not correspond to real Chennai stops",
+        "Trip start times are jittered by up to +/-15 minutes to create realistic headway variation"
+    ]
+}
