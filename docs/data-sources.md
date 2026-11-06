@@ -1,99 +1,66 @@
-# Data Sources and Preparation Notes
+# Data Sources and Data Description
 
-## 1. Chennai MTC Static GTFS
+## 1. Project Case Study
 
-**Publisher:** Chennai Unified Metropolitan Transport Authority (CUMTA)
+This project uses Chennai Metropolitan Transport Corporation (MTC) as the public transport case study.
 
-**Portal:** https://opendata.cumta.org/
+The active dashboard uses synthetic operational data to demonstrate data preparation, metric calculation, interactive filtering, and visualisation.
 
-**Dataset:** MTC Bus — routes, stop locations and trip frequencies.
+## 2. Active Dashboard Dataset
 
-The downloaded static GTFS package contains files including:
+The dashboard dataset contains the following CSV files:
 
-- `agency.txt`
-- `routes.txt`
-- `trips.txt`
-- `stop_times.txt`
-- `stops.txt`
-- `calendar.txt`
-- `feed_info.txt`
-
-The inspected package did not contain `shapes.txt` or `frequencies.txt`.
-
-## 2. Geographic reference data
-
-The CUMTA package also contains geographic files:
-
-- `all_mtc_routes.geojson`
-- `mtc_stops.geojson`
-- `routes_polyline.geojson`
-- `bus_terminus.geojson`
-
-These files were inspected for route geometry, stop locations and geographic consistency.
-
-## 3. Prepared outputs
-
-The `data-preparation/prepared/` directory contains:
-
-| File | Purpose |
+| File | Description |
 |---|---|
-| `prepared_stops.csv` | Prepared stop records with coordinate-quality information |
-| `stops_for_map.csv` | 5,419 stops selected for default map eligibility |
-| `stop_quality_summary.csv` | Summary of stop-coordinate quality |
-| `stop_dataset_metadata.json` | Metadata describing the prepared stop dataset |
-| `selected_routes.geojson` | Six selected route geometries with validation status |
+| `routes.csv` | Route identifiers and route details |
+| `stops.csv` | Stop identifiers and stop details |
+| `buses.csv` | Bus identifiers and capacity information |
+| `trips.csv` | Simulated trip and schedule records |
+| `trip_stops.csv` | Scheduled stop sequence and timing records |
+| `stop_observations.csv` | Simulated passenger and arrival observations |
 
-The dashboard reads `stops_for_map.csv` and `selected_routes.geojson` directly from this folder. The stop markers are loaded only when the map checkbox is enabled.
+## 3. Data Classification
 
-## 4. Stop coordinate quality
+**Synthetic operational data**
 
-The GTFS stop dataset contains 7,128 records.
+The active dashboard's trip, passenger, delay, and occupancy observations are simulated for academic demonstration. They must not be interpreted as actual MTC operational measurements.
 
-The prepared stop dataset classifies coordinates into four categories:
+**Geographic reference research**
 
-- Verified GeoJSON match
-- Unique unmatched provisional
-- Repeated-coordinate review
-- Placeholder candidate
+GTFS and geographic datasets were separately explored and prepared as part of preliminary data research. These files are retained under `data-preparation/` for future work. They are not integrated into the active dashboard.
 
-A total of 5,419 stops were selected for the default map. Placeholder candidates and repeated-coordinate review records were excluded from that map.
+## 4. External Reference Sources
 
-These classifications describe the preparation process; they do not guarantee that every included coordinate is perfectly accurate. Provisional coordinates remain provisional.
-
-## 5. Selected route quality
-
-Six route geometries were selected:
-
-- 118N
-- 120E
-- 120KET
-- 555M
-- S12
-- S54TCT
-
-One route was included without an endpoint warning. Five were included with warnings related to endpoint proximity or unavailable reliable terminal coordinates.
-
-The map displays routes without warnings in teal and routes with quality warnings in amber. Each route's quality note is displayed below the map and in its popup. No missing terminal coordinate is invented.
-
-## 6. Synthetic operational data
-
-The dashboard also contains a separate synthetic operational dataset for demonstrating transport analytics.
-
-Passenger counts, occupancy, delays and other operational measures are simulated. They are not official MTC operational records and must not be described as measured MTC performance.
-
-## 7. Map implementation and limitations
-
-- The interactive map uses Leaflet.js and OpenStreetMap tiles.
-- Route geometry and stop locations are static reference data.
-- Static GTFS is not real-time vehicle tracking.
-- Route geometry matching and endpoint checks are not equivalent to complete route validation.
-- Some GTFS stop coordinates were identified as possible placeholders and excluded from the default map.
-- The stop layer contains 5,419 map-ready points and is optional to reduce initial rendering load.
-- The dashboard requires HTTP serving from the repository root so the map can read the sibling `data-preparation/prepared/` directory.
-- An internet connection is required for the Leaflet library and map tiles.
-
-## 8. Source links
+The following sources were consulted during project research:
 
 - CUMTA Open Data Portal: https://opendata.cumta.org/
-- Official MTC Performance: https://mtcbus.tn.gov.in/home/performance
-- OpenCity MTC Performance Dataset: https://data.opencity.in/dataset/chennai-mtc-performance-data
+- Chennai MTC Official Performance Information: https://mtcbus.tn.gov.in/home/performance
+- OpenCity Chennai MTC Performance Dataset: https://data.opencity.in/dataset/chennai-mtc-performance-data
+- Mobility Database: https://mobilitydatabase.org/
+
+These sources provide background and reference information. Their existence does not mean that the active dashboard uses their operational records.
+
+## 5. Data Preparation and Validation
+
+The project includes offline data preparation and validation work using Python, pandas, and Jupyter Notebook.
+
+The preparation workflow supports:
+- Dataset inspection and structural validation.
+- Missing-value and duplicate checks.
+- Relationship checks between routes, stops, buses, and trips.
+- Consistency checks for passenger and occupancy values.
+- Preparation of data for browser-based visualisation.
+
+The notebook and prepared research outputs are retained separately from the active dashboard dataset.
+
+## 6. Limitations
+
+- The active dashboard does not use live MTC GPS data.
+- Passenger counts and operational observations are synthetic.
+- Dashboard metrics demonstrate analytical methods, not verified MTC performance.
+- Geographic map integration is outside the current project scope.
+- External reference sources are not automatically connected to the dashboard.
+
+## 7. Future Scope
+
+Future development may integrate validated MTC operational datasets, verified geographic stop and route information, and authorised GPS or real-time feeds where available.

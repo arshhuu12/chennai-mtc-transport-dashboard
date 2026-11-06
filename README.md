@@ -1,79 +1,106 @@
 # Chennai MTC Public Transport Analytics Dashboard
 
-## Project overview
+An interactive public transport analytics dashboard developed using **HTML5, CSS3, JavaScript, and D3.js**. The project demonstrates how data visualisation can support the analysis of public transport operations, using Chennai Metropolitan Transport Corporation (MTC) as the case study.
 
-This M.E. CSE (Data Science) assignment develops an interactive public transport analytics dashboard using JavaScript, D3.js and Leaflet.js, with a focus on Chennai's Metropolitan Transport Corporation (MTC).
+## 1. Project Overview
 
-The project combines:
-1. Static CUMTA/MTC geographic reference data for route geometries and bus stop locations.
-2. A separate synthetic operational dataset for demonstrating passenger demand, delays and occupancy analytics.
+Public transport systems generate operational data that can be analysed to understand passenger demand, route performance, stop-level activity, delays, and bus occupancy.
 
-These sources are kept distinct. Synthetic passenger and operational metrics are not official MTC performance data.
+This project develops a browser-based dashboard to present these indicators through interactive visualisations and filters.
 
-## Objectives
+**Important:** The operational data currently used in the dashboard is synthetic demonstration data. It is not actual MTC operational or passenger data, and the dashboard does not represent verified MTC performance.
 
-- Explore Chennai MTC route and bus stop reference data.
-- Prepare and validate geographic data for interactive mapping.
-- Analyse sample transport operations using synthetic data.
-- Present transport indicators through interactive D3 visualisations.
-- Document data quality issues, assumptions and processing decisions.
+## 2. Objectives
 
-## Technologies
+- Analyse passenger demand across routes and stops.
+- Compare route-level performance.
+- Visualise daily passenger demand trends.
+- Examine simulated arrival delays.
+- Analyse simulated bus occupancy.
+- Provide interactive filtering and clear visual summaries.
 
-- HTML5 and CSS3
-- Vanilla JavaScript
-- D3.js for operational analytics
-- Leaflet.js for geographic mapping
-- Python, pandas and Jupyter Notebook for offline preparation
-- CSV, JSON and GeoJSON
+## 3. Technology Stack
 
-## Repository structure
+| Component | Technology |
+|---|---|
+| Dashboard structure | HTML5 |
+| Styling | CSS3 |
+| Programming | Vanilla JavaScript |
+| Data visualisation | D3.js |
+| Data format | CSV and JSON |
+| Offline data preparation | Python, pandas and Jupyter Notebook |
+
+The dashboard runs in a web browser and does not require Node.js, a backend server, or a database.
+
+## 4. Dashboard Features
+
+- Key performance indicator cards.
+- Route-level demand and performance visualisation.
+- Daily passenger demand trends.
+- Stop-level demand analysis.
+- Arrival delay distribution.
+- Bus occupancy analysis.
+- Interactive route and date filters.
+- Responsive dashboard layout.
+
+## 5. Dataset and Limitations
+
+The active dashboard uses a synthetic dataset created for demonstration and visualisation purposes.
+
+The dataset includes routes, stops, buses, trips, trip-stop records, and simulated stop observations.
+
+The data supports demonstration of data loading, transformation, metric calculation, filtering, and visualisation. It must not be interpreted as actual MTC passenger counts, bus schedules, GPS records, or operational performance.
+
+Geographic data preparation and map integration are retained as future work and are not part of the current dashboard implementation.
+
+## 6. Project Structure
 
 ```text
-.
+Chennai-MTC-GitHub-Upload/
+├── README.md
 ├── dashboard/
+│   ├── index.html
 │   ├── css/
-│   ├── data/                 # Synthetic operational data
-│   ├── js/                   # D3 analytics and Leaflet map modules
-│   ├── tools/
-│   └── index.html
+│   ├── js/
+│   ├── data/
+│   └── tools/
 ├── data-preparation/
 │   ├── notebooks/
-│   └── prepared/             # Prepared static MTC geographic data
-├── docs/
-└── README.md
+│   └── prepared/
+└── docs/
+    └── data-sources.md
 ```
 
-## Run the dashboard
+## 7. Running the Dashboard
 
-Start a static HTTP server from the repository root:
+Python is required only to start a local static web server.
+
+From the project root, run:
 
 ```bash
 python -m http.server 8000
 ```
 
-Open `http://localhost:8000/dashboard/`. Do not use `file://`; the browser must load CSV and GeoJSON files over HTTP.
+Open the following address in your browser:
 
-## Data sources and methodology
+```text
+http://localhost:8000/dashboard/
+```
 
-Geographic reference data is based on Chennai MTC static GTFS and associated geographic files published through the Chennai Unified Metropolitan Transport Authority (CUMTA) open-data portal: https://opendata.cumta.org/.
+## 8. Academic Scope
 
-Preparation includes stop-coordinate matching, coordinate-quality classification, route matching, endpoint checks and export of selected map-ready datasets. See `docs/data-sources.md` and the Jupyter notebook in `data-preparation/notebooks/`.
+This project is developed as an academic assignment for the subject **Data Science and Visualization** in the M.E. Computer Science and Engineering (Data Science) programme.
 
-## Important limitations
+The implementation focuses on data preparation, metric calculation, interactive filtering, and visual analytics using JavaScript and D3.js.
 
-- Static GTFS describes scheduled/reference information; it is not live GPS data.
-- The map displays six selected route geometries and 5,419 map-ready stop locations.
-- Five of the six selected route geometries carry endpoint or coordinate-quality warnings. These warnings are displayed in the map.
-- Provisional stop coordinates have not all been independently verified.
-- Route geometry and terminal checks are preliminary validation, not proof of complete route accuracy.
-- Passenger boardings, alightings, occupancy, delays and trip observations in the analytics dashboard are synthetic, not actual MTC operational records.
-- The original raw GTFS archive is not included in the repository; retain it locally in the notebook's expected `raw/` folder if you need to rerun the full preparation workflow.
+## 9. Future Enhancements
 
-## Academic context
+- Integrate verified MTC operational datasets when available.
+- Incorporate validated geographic route and stop information.
+- Explore GPS-based delay and service reliability analysis.
+- Extend the dashboard with additional operational indicators.
+- Integrate real-time data if an authorised data source becomes available.
 
-Developed as an M.E. Computer Science and Engineering (Data Science) assignment for the study of data science and visualization.
+## 10. Disclaimer
 
-## Responsible use
-
-Check the source publisher's current licence and reuse terms before redistributing original data. Always identify synthetic operational data as synthetic.
+This is an academic demonstration project. Synthetic operational data is used in the active dashboard. The project is not an official MTC application and is not affiliated with or endorsed by Chennai Metropolitan Transport Corporation.

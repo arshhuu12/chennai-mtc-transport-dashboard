@@ -1,50 +1,75 @@
-# Public Transport Analytics Dashboard
+# Dashboard Documentation
 
-A browser-based academic dashboard built with HTML5, CSS3, Vanilla JavaScript, D3.js and Leaflet.js.
+## Chennai MTC Public Transport Analytics Dashboard
 
-## Run the dashboard
+This folder contains the browser-based dashboard developed using HTML5, CSS3, Vanilla JavaScript, and D3.js.
 
-Start the static server from the **repository root** so the dashboard can read the prepared geographic files in the sibling `data-preparation/` folder.
+## Features
+
+- Passenger demand KPIs.
+- Route-level demand and performance analysis.
+- Daily demand trends.
+- Stop-level demand analysis.
+- Arrival delay distribution.
+- Bus occupancy analysis.
+- Interactive route and date filters.
+- Responsive dashboard interface.
+
+## Folder Structure
+
+```text
+dashboard/
+├── index.html
+├── css/
+│   └── style.css
+├── js/
+│   ├── data-loader.js
+│   ├── metrics.js
+│   ├── filters.js
+│   ├── charts.js
+│   ├── app.js
+│   └── advanced-charts.js
+├── data/
+│   ├── routes.csv
+│   ├── stops.csv
+│   ├── buses.csv
+│   ├── trips.csv
+│   ├── trip_stops.csv
+│   └── stop_observations.csv
+└── tools/
+    └── validation and testing utilities
+```
+
+## Running the Dashboard
+
+Open a terminal in the project root and run:
 
 ```bash
 python -m http.server 8000
 ```
 
-Open:
+Then open:
 
-`http://localhost:8000/dashboard/`
+```text
+http://localhost:8000/dashboard/
+```
 
-Do not open the HTML file directly with `file://`; browser CSV and GeoJSON loading requires HTTP.
+## Data Description
 
-## Project structure
+The dashboard uses CSV files containing synthetic demonstration data for routes, stops, buses, trips, trip-stop records, and stop observations.
 
-- `index.html` — main dashboard entry point.
-- `css/` — dashboard, chart and map styles.
-- `js/app.js` — dashboard initialisation, filtering and UI coordination.
-- `js/map.js` — Leaflet map for static MTC route geometry and map-ready stops.
-- `js/data-loader.js`, `js/metrics.js`, `js/filters.js` — operational data loading, calculations and filters.
-- `js/charts.js`, `js/advanced-charts.js` — D3 visualisations.
-- `data/` — synthetic operational CSV/JSON data.
-- `../data-preparation/prepared/` — prepared MTC stop CSV and selected route GeoJSON used by the map.
-- `tools/` — optional development utilities and validation pages.
+**Data limitation:** These operational records are simulated. They are not actual MTC passenger counts, GPS observations, schedules, or measured performance.
 
-## Geographic map
+## Technology
 
-The map loads:
+- HTML5
+- CSS3
+- Vanilla JavaScript
+- D3.js
+- CSV data
 
-- `../data-preparation/prepared/selected_routes.geojson` — six selected route geometries.
-- `../data-preparation/prepared/stops_for_map.csv` — 5,419 map-ready stop locations.
+No Node.js, backend, database, or JavaScript framework is required.
 
-Use the route selector to display all selected routes or one route. Stop markers are optional and load only when the checkbox is enabled to keep the initial map responsive.
+## Scope
 
-Routes with endpoint or coordinate-quality concerns are shown in amber, and their quality notes remain visible below the map. The map uses static geographic reference data; it does not show live bus positions or real-time tracking.
-
-## Operational dataset provenance and limitations
-
-The dashboard's passenger, delay, occupancy and trip-observation records are a **synthetic demonstration dataset**, not actual Chennai MTC operational data. The map's route and stop references are separate static CUMTA/MTC geographic data.
-
-The dashboard must label synthetic operational data as synthetic in the user interface and in any report or demonstration. See `data/dataset_metadata.json` and the repository's `docs/data-sources.md`.
-
-## Technology constraints
-
-The dashboard uses HTML, CSS, Vanilla JavaScript, D3.js, Leaflet.js and CSV/JSON/GeoJSON. No backend, database, Node.js application server or front-end framework is required. D3.js, Leaflet.js and OpenStreetMap tiles require an internet connection.
+The current dashboard focuses on operational analytics and interactive visualisation. Geographic map integration is not included in the active version.
