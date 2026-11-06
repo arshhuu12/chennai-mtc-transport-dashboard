@@ -1,138 +1,79 @@
-\# Chennai MTC Public Transport Analytics Dashboard
+# Chennai MTC Public Transport Analytics Dashboard
 
+## Project overview
 
+This M.E. CSE (Data Science) assignment develops an interactive public transport analytics dashboard using JavaScript, D3.js and Leaflet.js, with a focus on Chennai's Metropolitan Transport Corporation (MTC).
 
-\## Project Overview
+The project combines:
+1. Static CUMTA/MTC geographic reference data for route geometries and bus stop locations.
+2. A separate synthetic operational dataset for demonstrating passenger demand, delays and occupancy analytics.
 
+These sources are kept distinct. Synthetic passenger and operational metrics are not official MTC performance data.
 
+## Objectives
 
-This project develops an interactive public transport analytics dashboard using JavaScript and D3.js, with a focus on Chennai's Metropolitan Transport Corporation (MTC).
+- Explore Chennai MTC route and bus stop reference data.
+- Prepare and validate geographic data for interactive mapping.
+- Analyse sample transport operations using synthetic data.
+- Present transport indicators through interactive D3 visualisations.
+- Document data quality issues, assumptions and processing decisions.
 
+## Technologies
 
+- HTML5 and CSS3
+- Vanilla JavaScript
+- D3.js for operational analytics
+- Leaflet.js for geographic mapping
+- Python, pandas and Jupyter Notebook for offline preparation
+- CSV, JSON and GeoJSON
 
-The project combines public transport reference data with a separate synthetic operational dataset to demonstrate data preparation, validation, analysis, and visualization.
-
-
-
-\## Objectives
-
-
-
-\- Explore Chennai MTC routes and bus stop reference data.
-
-\- Prepare and validate geographic data for mapping.
-
-\- Analyse sample transport operations using synthetic data.
-
-\- Present transport indicators through interactive visualizations.
-
-\- Document data quality issues and processing decisions.
-
-
-
-\## Technologies
-
-
-
-\- HTML5 and CSS3
-
-\- JavaScript
-
-\- D3.js
-
-\- Leaflet.js (planned for geographic map integration)
-
-\- Python and pandas for offline data preparation
-
-\- Jupyter Notebook
-
-\- CSV, JSON, and GeoJSON
-
-
-
-\## Repository Structure
-
-
+## Repository structure
 
 ```text
-
-Chennai-MTC-GitHub-Upload/
-
-├── .gitignore
-
-├── README.md
-
-├── data-preparation/
-
-│   ├── notebooks/
-
-│   └── prepared/
-
+.
 ├── dashboard/
-
-└── docs/
-
+│   ├── css/
+│   ├── data/                 # Synthetic operational data
+│   ├── js/                   # D3 analytics and Leaflet map modules
+│   ├── tools/
+│   └── index.html
+├── data-preparation/
+│   ├── notebooks/
+│   └── prepared/             # Prepared static MTC geographic data
+├── docs/
+└── README.md
 ```
 
+## Run the dashboard
 
+Start a static HTTP server from the repository root:
 
-\## Data Sources and Methodology
+```bash
+python -m http.server 8000
+```
 
+Open `http://localhost:8000/dashboard/`. Do not use `file://`; the browser must load CSV and GeoJSON files over HTTP.
 
+## Data sources and methodology
 
-The geographic reference data is based on the Chennai MTC static GTFS and associated geographic data published through the Chennai Unified Metropolitan Transport Authority (CUMTA) open-data portal.
+Geographic reference data is based on Chennai MTC static GTFS and associated geographic files published through the Chennai Unified Metropolitan Transport Authority (CUMTA) open-data portal: https://opendata.cumta.org/.
 
+Preparation includes stop-coordinate matching, coordinate-quality classification, route matching, endpoint checks and export of selected map-ready datasets. See `docs/data-sources.md` and the Jupyter notebook in `data-preparation/notebooks/`.
 
+## Important limitations
 
-The dashboard's operational demonstration dataset is synthetic. It must not be interpreted as actual MTC passenger counts, bus operations, delays, or performance.
+- Static GTFS describes scheduled/reference information; it is not live GPS data.
+- The map displays six selected route geometries and 5,419 map-ready stop locations.
+- Five of the six selected route geometries carry endpoint or coordinate-quality warnings. These warnings are displayed in the map.
+- Provisional stop coordinates have not all been independently verified.
+- Route geometry and terminal checks are preliminary validation, not proof of complete route accuracy.
+- Passenger boardings, alightings, occupancy, delays and trip observations in the analytics dashboard are synthetic, not actual MTC operational records.
+- The original raw GTFS archive is not included in the repository; retain it locally in the notebook's expected `raw/` folder if you need to rerun the full preparation workflow.
 
-
-
-Data preparation includes stop-coordinate matching, route matching, endpoint checks, coordinate-quality classification, and export of selected map-ready datasets.
-
-
-
-See `docs/data-sources.md` for source details and data limitations.
-
-
-
-\## Important Data Limitations
-
-
-
-\- Static GTFS describes scheduled public transport information; it is not live GPS data.
-
-\- Synthetic operational records are used for dashboard demonstrations.
-
-\- Some GTFS stop coordinates were identified as possible placeholders and excluded from the default map.
-
-\- Six selected route geometries are prepared for mapping. Five carry endpoint or coordinate-quality warnings.
-
-\- Route geometry and terminal checks are preliminary validation, not proof of complete route accuracy.
-
-
-
-\## Project Status
-
-
-
-The dashboard and data-preparation stages are being developed incrementally. Geographic map integration and further validation are planned.
-
-
-
-\## Academic Context
-
-
+## Academic context
 
 Developed as an M.E. Computer Science and Engineering (Data Science) assignment for the study of data science and visualization.
 
+## Responsible use
 
-
-\## Responsible Use
-
-
-
-Source datasets should be used in accordance with their respective licences and terms. Synthetic data must always be identified as synthetic.
-
-
-
+Check the source publisher's current licence and reuse terms before redistributing original data. Always identify synthetic operational data as synthetic.

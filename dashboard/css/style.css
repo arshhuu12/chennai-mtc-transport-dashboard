@@ -146,3 +146,88 @@ a { color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
 }
+
+
+/* Chennai MTC geographic reference map */
+.map-panel { grid-column: 1 / -1; }
+.map-toolbar {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 0 0 13px;
+  padding: 13px 14px;
+  border: 1px solid #e9eef3;
+  border-radius: 11px;
+  background: #f8fafc;
+}
+#map-route-filter {
+  min-width: 220px;
+  min-height: 37px;
+  padding: 0 11px;
+  border: 1px solid #dce4ec;
+  border-radius: 8px;
+  background: #fff;
+  color: #2c3f53;
+  font: inherit;
+  font-size: 11px;
+}
+.map-stop-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 37px;
+  color: #536579;
+  font-size: 11px;
+  font-weight: 600;
+}
+.map-stop-toggle input { width: 15px; height: 15px; accent-color: var(--teal); }
+.map-status {
+  margin: 0 0 0 auto;
+  max-width: 48%;
+  color: #087f6a;
+  font-size: 10px;
+  text-align: right;
+}
+.map-status.is-error { color: #b42318; }
+#network-map {
+  width: 100%;
+  height: 520px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #edf2f6;
+  z-index: 1;
+}
+.map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 13px 20px;
+  padding: 12px 2px 4px;
+  color: #68798c;
+  font-size: 10px;
+}
+.map-legend span { display: inline-flex; align-items: center; gap: 7px; }
+.legend-line { display: inline-block; width: 22px; height: 0; border-top: 4px solid; border-radius: 4px; }
+.legend-route { border-color: #087f6a; }
+.legend-warning { border-color: #d99018; }
+.legend-dot { display: inline-block; width: 8px; height: 8px; border: 1px solid #fff; border-radius: 50%; background: #3b82f6; box-shadow: 0 0 0 1px #3b82f6; }
+.map-route-details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+.map-route-details h3 { grid-column: 1 / -1; margin: 0; color: var(--navy); font: 700 12px Manrope, sans-serif; }
+.map-route-detail { min-width: 0; padding: 11px 12px; border: 1px solid var(--border); border-radius: 9px; background: #fbfcfe; }
+.map-route-detail strong { display: block; margin-bottom: 4px; color: #34485d; font-size: 10px; }
+.map-route-detail p { margin: 2px 0 0; color: #718094; font-size: 10px; overflow-wrap: anywhere; }
+.map-popup { min-width: 170px; line-height: 1.5; }
+.map-popup strong { display: block; margin-bottom: 5px; color: #17283d; }
+.map-popup div { font-size: 11px; overflow-wrap: anywhere; }
+.map-popup div span:first-child { color: #718094; font-weight: 600; }
+
+@media (max-width: 760px) {
+  #network-map { height: 430px; }
+  .map-status { max-width: 100%; margin-left: 0; text-align: left; }
+  .map-route-details { grid-template-columns: 1fr; }
+}
