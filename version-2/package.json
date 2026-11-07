@@ -1,0 +1,29 @@
+{
+  "name": "chennai-mtc-dashboard-v2",
+  "version": "2.0.0",
+  "description": "Chennai MTC Public Transport Analytics Dashboard - Version 2",
+  "type": "module",
+  "main": "src/server.js",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --test tests/**/*.test.js"
+  },
+  "keywords": [
+    "chennai",
+    "mtc",
+    "transport",
+    "analytics",
+    "dashboard",
+    "express"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "csv-parse": "^7.0.3",
+    "express": "^5.0.0"
+  }
+}

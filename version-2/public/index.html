@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chennai MTC Transport Analytics - Version 2</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Header -->
+    <header class="header">
+      <div class="brand">
+        <span class="badge">V2</span>
+        <div>
+          <h1>Chennai MTC Transport Analytics</h1>
+          <p class="subtitle">Simulated demonstration operational dataset — not official MTC records.</p>
+        </div>
+      </div>
+      <div class="server-status" id="server-status-pill" aria-label="Backend status">
+        <span class="status-indicator" id="status-indicator"></span>
+        <span id="status-text">Connecting...</span>
+      </div>
+    </header>
+
+    <!-- Error Banner -->
+    <div id="error-banner" class="banner error-banner" role="alert" aria-live="assertive">
+      <span class="error-icon">⚠️</span>
+      <span id="error-message">An error occurred while loading data.</span>
+    </div>
+
+    <!-- Filters Section -->
+    <section class="card filter-card" aria-label="Dashboard Filters">
+      <div class="filter-toolbar">
+        <div class="filter-group">
+          <label for="route-filter">Route</label>
+          <select id="route-filter" name="routeFilter">
+            <option value="all">All Routes (12 routes)</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="date-filter">Service Date</label>
+          <input type="date" id="date-filter" name="dateFilter">
+        </div>
+
+        <div class="filter-actions">
+          <button type="button" id="reset-filters" class="btn btn-secondary">Reset Filters</button>
+        </div>
+
+        <div class="filter-info">
+          <span id="loading-indicator" class="loading-spinner" aria-hidden="true"></span>
+          <span class="filter-hint">Filters update all metrics and charts</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- KPI Metrics Section -->
+    <section class="kpi-section" aria-label="Operations Overview Key Metrics">
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <span class="kpi-label">Total Trips</span>
+          <span class="kpi-value" id="kpi-total-trips">--</span>
+          <span class="kpi-subtext">Operating service runs</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Passenger Boardings</span>
+          <span class="kpi-value highlight-teal" id="kpi-total-boardings">--</span>
+          <span class="kpi-subtext">Total boarding events</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Passenger Alightings</span>
+          <span class="kpi-value" id="kpi-total-alightings">--</span>
+          <span class="kpi-subtext">Total alighting events</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Average Delay</span>
+          <span class="kpi-value" id="kpi-average-delay">-- min</span>
+          <span class="kpi-subtext">Arrival deviation</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">On-time Arrivals</span>
+          <span class="kpi-value highlight-green" id="kpi-on-time-percentage">--%</span>
+          <span class="kpi-subtext">Within 0 to 5 minutes</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Early Arrivals</span>
+          <span class="kpi-value highlight-blue" id="kpi-early-arrivals">--</span>
+          <span class="kpi-subtext">Arrived before schedule</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Time-Weighted Occupancy</span>
+          <span class="kpi-value highlight-amber" id="kpi-time-weighted-occupancy">--%</span>
+          <span class="kpi-subtext">Duration-weighted load</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Charts Grid Section -->
+    <main class="charts-section" aria-label="Visual Analytics">
+      <div class="charts-grid">
+        <!-- 1. Route Comparison -->
+        <article class="card chart-card">
+          <div class="chart-header">
+            <div>
+              <h3>Route Passenger Demand</h3>
+              <p>Passenger boardings compared across routes</p>
+            </div>
+            <span class="chart-tag">ROUTE DEMAND</span>
+          </div>
+          <div class="chart-wrapper">
+            <canvas id="chart-route-comparison" role="img" aria-label="Passenger boardings by route"></canvas>
+          </div>
+        </article>
+
+        <!-- 2. Stop Passenger Demand -->
+        <article class="card chart-card">
+          <div class="chart-header">
+            <div>
+              <h3>Stop Passenger Demand</h3>
+              <p>Top ranked bus stops by passenger boardings</p>
+            </div>
+            <span class="chart-tag">STOP RANKINGS</span>
+          </div>
+          <div class="chart-wrapper">
+            <canvas id="chart-stop-demand" role="img" aria-label="Stop boardings ranking"></canvas>
+          </div>
+        </article>
+
+        <!-- 3. Daily Passenger Demand -->
+        <article class="card chart-card full-width">
+          <div class="chart-header">
+            <div>
+              <h3>Daily Passenger Demand Trends</h3>
+              <p>Daily boardings and alightings over service dates</p>
+            </div>
+            <span class="chart-tag">TRENDS</span>
+          </div>
+          <div class="chart-wrapper line-chart-wrapper">
+            <canvas id="chart-daily-demand" role="img" aria-label="Daily passenger trends line chart"></canvas>
+          </div>
+        </article>
+
+        <!-- 4. Arrival Delay Distribution -->
+        <article class="card chart-card">
+          <div class="chart-header">
+            <div>
+              <h3>Arrival Delay Distribution</h3>
+              <p>Arrival frequency grouped into 5-minute intervals</p>
+            </div>
+            <span class="chart-tag">PUNCTUALITY</span>
+          </div>
+          <div class="chart-wrapper">
+            <canvas id="chart-delay-distribution" role="img" aria-label="Arrival delay distribution histogram"></canvas>
+          </div>
+        </article>
+
+        <!-- 5. Route Occupancy -->
+        <article class="card chart-card">
+          <div class="chart-header">
+            <div>
+              <h3>Route-Level Bus Occupancy</h3>
+              <p>Time-weighted passenger occupancy vs bus capacity</p>
+            </div>
+            <span class="chart-tag">CAPACITY</span>
+          </div>
+          <div class="chart-wrapper">
+            <canvas id="chart-route-occupancy" role="img" aria-label="Route-level occupancy percentage"></canvas>
+          </div>
+        </article>
+
+        <!-- 6. Route Efficiency -->
+        <article class="card chart-card full-width">
+          <div class="chart-header">
+            <div>
+              <h3>Route Efficiency &amp; Schedule Regularity</h3>
+              <p>Journey time ratio (actual / scheduled). Reference 1.0 indicates on-schedule performance.</p>
+            </div>
+            <span class="chart-tag">EFFICIENCY</span>
+          </div>
+          <div class="chart-wrapper">
+            <canvas id="chart-route-efficiency" role="img" aria-label="Route journey time ratio"></canvas>
+          </div>
+        </article>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Chennai MTC Transport Analytics · Version 2 · Built with Node.js 24, Express 5 &amp; Chart.js</p>
+      <p class="footer-note">Demonstration dashboard using simulated operational records. Not official MTC performance data.</p>
+    </footer>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+route_id,route_name,origin,destination
+R001,Sample Route 001,Sample Stop 001,Sample Stop 004
+R002,Sample Route 002,Sample Stop 005,Sample Stop 008
+R003,Sample Route 003,Sample Stop 009,Sample Stop 012
+R004,Sample Route 004,Sample Stop 013,Sample Stop 016
+R005,Sample Route 005,Sample Stop 017,Sample Stop 020
+R006,Sample Route 006,Sample Stop 021,Sample Stop 024
+R007,Sample Route 007,Sample Stop 025,Sample Stop 028
+R008,Sample Route 008,Sample Stop 029,Sample Stop 032
+R009,Sample Route 009,Sample Stop 033,Sample Stop 036
+R010,Sample Route 010,Sample Stop 037,Sample Stop 040
+R011,Sample Route 011,Sample Stop 041,Sample Stop 044
+R012,Sample Route 012,Sample Stop 045,Sample Stop 048
